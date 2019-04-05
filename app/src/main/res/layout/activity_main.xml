@@ -15,4 +15,77 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.example.sunginhong.sideproject_03.MainBottom_GooeyView
+        android:id="@+id/gooeyview_canvas"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <RelativeLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:clipChildren="false"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <RelativeLayout
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="bottom">
+
+            <View
+                android:id="@+id/mainBottom_bgView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#005FCE55" />
+
+        </RelativeLayout>
+
+        <ImageButton
+            android:id="@+id/meinBottomMenu_Icn3"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignBottom="@+id/meinBottomMenu_Icn2"
+            android:layout_marginStart="33dp"
+            android:layout_toEndOf="@+id/meinBottomMenu_Icn2" />
+
+        <ImageButton
+            android:id="@+id/meinBottomMenu_Icn2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignBottom="@+id/view"
+            android:layout_marginStart="34dp"
+            android:layout_marginBottom="12dp"
+            android:layout_toEndOf="@+id/meinBottomMenu_CenterCircle" />
+
+        <ImageButton
+            android:id="@+id/meinBottomMenu_Icn1"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignBottom="@+id/view"
+            android:layout_marginEnd="34dp"
+            android:layout_marginBottom="12dp"
+            android:layout_toStartOf="@+id/meinBottomMenu_CenterCircle" />
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/meinBottomMenu_Icn0"
+            android:layout_alignBottom="@+id/meinBottomMenu_Icn1"
+            android:layout_marginEnd="33dp"
+            android:layout_toStartOf="@+id/meinBottomMenu_Icn1"/>
+
+        <com.example.sunginhong.sideproject_03.MainBottom_CircleView
+            android:id="@+id/meinBottomMenu_CenterCircle"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignTop="@+id/view"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/tv" />
+
+    </RelativeLayout>
+
+
 </android.support.constraint.ConstraintLayout>
