@@ -6,6 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <View
+        android:id="@+id/mainBgColor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#005FCE55" />
+
     <RelativeLayout
         android:id="@+id/mainRL"
         android:layout_height="match_parent"
@@ -53,47 +59,69 @@
         </RelativeLayout>
 
         <ImageButton
-            android:id="@+id/meinBottomMenu_Icn3"
+            android:id="@+id/mainBottomMenu_Icn3"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_alignBottom="@+id/meinBottomMenu_Icn2"
+            android:layout_alignBottom="@+id/mainBottomMenu_Icn2"
             android:layout_marginStart="33dp"
-            android:layout_toEndOf="@+id/meinBottomMenu_Icn2" />
+            android:layout_toEndOf="@+id/mainBottomMenu_Icn2" />
 
         <ImageButton
-            android:id="@+id/meinBottomMenu_Icn2"
+            android:id="@+id/mainBottomMenu_Icn2"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignBottom="@+id/view"
             android:layout_marginStart="34dp"
             android:layout_marginBottom="12dp"
-            android:layout_toEndOf="@+id/meinBottomMenu_CenterCircle" />
+            android:layout_toEndOf="@+id/mainBottomMenu_CenterCircle" />
 
         <ImageButton
-            android:id="@+id/meinBottomMenu_Icn1"
+            android:id="@+id/mainBottomMenu_Icn1"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignBottom="@+id/view"
             android:layout_marginEnd="34dp"
             android:layout_marginBottom="12dp"
-            android:layout_toStartOf="@+id/meinBottomMenu_CenterCircle" />
+            android:layout_toStartOf="@+id/mainBottomMenu_CenterCircle" />
 
         <ImageButton
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:id="@+id/meinBottomMenu_Icn0"
-            android:layout_alignBottom="@+id/meinBottomMenu_Icn1"
+            android:id="@+id/mainBottomMenu_Icn0"
+            android:layout_alignBottom="@+id/mainBottomMenu_Icn1"
             android:layout_marginEnd="33dp"
-            android:layout_toStartOf="@+id/meinBottomMenu_Icn1"/>
+            android:layout_toStartOf="@+id/mainBottomMenu_Icn1"/>
 
         <com.example.sunginhong.sideproject_03.MainBottom_CircleView
-            android:id="@+id/meinBottomMenu_CenterCircle"
+            android:id="@+id/mainBottomMenu_CenterCircle"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_alignTop="@+id/view"
+            android:layout_centerHorizontal="true" />
+
+        <RelativeLayout
+            android:id="@+id/mainBottomMenu_CenterRlView"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:clipChildren="false"
+            android:layout_alignTop="@+id/view"
             android:layout_centerHorizontal="true"
-            android:alpha="0.8"
-            android:background="@drawable/tv" />
+            xmlns:android="http://schemas.android.com/apk/res/android">
+
+            <ImageView
+                android:id="@+id/mainBottomMenu_CenterView_Green"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:alpha="1"
+                android:background="@drawable/centercircle_green" />
+
+            <ImageView
+                android:id="@+id/mainBottomMenu_CenterView_White"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:alpha="0"
+                android:background="@drawable/centercircle_white" />
+        </RelativeLayout>
 
     </RelativeLayout>
 

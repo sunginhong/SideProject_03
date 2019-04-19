@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -95,7 +94,7 @@ public class MainBottom_GooeyView extends View {
 
         // TODO Auto-generated method stub
         super.onDraw(canvas);
-        circle = MainBottom_CircleView.meinBottomMenu_CenterCircle;
+        circle = MainBottom_CircleView.mainBottomMenu_CenterCircle;
         View bottom_bgView = MainActivity.mainBottom_bgView;
         circleWidth = circle.getWidth();
         circleRate = circleWidth/8;
@@ -123,7 +122,6 @@ public class MainBottom_GooeyView extends View {
         }
     };
 
-
     static void pathDraw(){
         path = new Path();
         paint.setAntiAlias(true);
@@ -148,7 +146,7 @@ public class MainBottom_GooeyView extends View {
         if (float_calcRate_alpha <= 0){ float_calcRate_alpha = 0; }
         if (float_calcRate_alpha >= calcRateN_ALPHA_RATE){ float_calcRate_alpha = calcRateN_ALPHA_RATE; }
         gooeyview_canvas.setAlpha(float_calcRate_alpha);
-        MainActivity.mainRvLayout.setAlpha(float_calcRate_alpha);
+//        MainActivity.mainRvLayout.setAlpha(float_calcRate_alpha);
 
         calcRateN_0_RATE = MainBottom_CircleView.mainBottom_bgView_Height + circleWidth/2;
         float calcRateN_0 = Utils_Calc.ModulateCalc(circle.getY(), circleSetOriginY, MainActivity.screenHeight/scrollRateN, calcRateN_0_RATE, 0);

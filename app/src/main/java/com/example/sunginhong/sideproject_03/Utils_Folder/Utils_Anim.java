@@ -2,6 +2,7 @@ package com.example.sunginhong.sideproject_03.Utils_Folder;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -27,5 +28,18 @@ public class Utils_Anim {
         final ObjectAnimator backgroundColorAnimator = ObjectAnimator.ofObject(view, "backgroundColor", new ArgbEvaluator(), startColor, endColor);
         backgroundColorAnimator.setDuration(duration);
         backgroundColorAnimator.start();
+    }
+
+    public static void drawableAlphaAnim(final View view, int startAlpha, int endAlpha, int duration){
+        ValueAnimator anim = ValueAnimator.ofFloat(startAlpha, endAlpha);
+        anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                view.setAlpha((Float) animation.getAnimatedValue());
+            }
+        });
+        anim.setInterpolator(new DecelerateInterpolator((float) 1.5));
+        anim.setDuration(duration);
+        anim.start();
     }
 }

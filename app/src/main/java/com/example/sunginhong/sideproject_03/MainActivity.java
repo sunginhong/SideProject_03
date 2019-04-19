@@ -1,13 +1,13 @@
 package com.example.sunginhong.sideproject_03;
 
-import android.graphics.Color;
+import android.animation.ValueAnimator;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,9 +15,13 @@ public class MainActivity extends AppCompatActivity {
     static int screenWidth;
     static int screenHeight;
 
+    static View mainBgColor;
     static View mainBottom_bgView;
-    static ImageButton meinBottomMenu_Icn0;
+    static ImageButton mainBottomMenu_Icn0;
     static RelativeLayout mainRvLayout;
+    static RelativeLayout mainBottomMenu_CenterRlView;
+    static ImageView mainBottomMenu_CenterView_Green;
+    static ImageView mainBottomMenu_CenterView_White;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +38,14 @@ public class MainActivity extends AppCompatActivity {
         screenWidth = size.x;
         screenHeight = size.y;
 
-        meinBottomMenu_Icn0 = (ImageButton) findViewById(R.id.meinBottomMenu_Icn0);
+        mainBgColor = (View) findViewById(R.id.mainBgColor);
+        mainBottomMenu_CenterRlView = (RelativeLayout) findViewById(R.id.mainBottomMenu_CenterRlView);
+        mainBottomMenu_CenterView_Green = (ImageView) findViewById(R.id.mainBottomMenu_CenterView_Green);
+        mainBottomMenu_CenterView_White = (ImageView) findViewById(R.id.mainBottomMenu_CenterView_White);
+        mainBottomMenu_Icn0 = (ImageButton) findViewById(R.id.mainBottomMenu_Icn0);
         mainRvLayout = (RelativeLayout) findViewById(R.id.mainRL);
-        mainRvLayout.setBackgroundResource(R.color.gooeyview_bg_color);
+        mainBgColor.setBackgroundResource(R.color.gooeyview_bg_color);
+        mainBgColor.setAlpha(0);
 
     }
 }

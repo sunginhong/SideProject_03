@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 
@@ -19,12 +20,14 @@ public class MainBottom_CircleView extends android.support.v7.widget.AppCompatIm
 
     Context context;
     static boolean drag = false;
+    static boolean dragENTER = false;
     private float dragStart_x = 0;
     private float dragStart_y = 0;
     static float dragMove_x = 0;
     static float dragMove_y = 0;
-    static ImageView meinBottomMenu_CenterCircle;
-    private float meinBottomMenu_CenterCircle_onriginY = 0;
+    static ImageView mainBottomMenu_CenterCircle;
+
+    private float mainBottomMenu_CenterCircle_onriginY = 0;
     static int mainBottom_bgView_Height = 0;
 
     public MainBottom_CircleView(Context context) {
@@ -43,14 +46,14 @@ public class MainBottom_CircleView extends android.support.v7.widget.AppCompatIm
     }
 
     private void initView(){
-        meinBottomMenu_CenterCircle = (ImageView) findViewById(R.id.meinBottomMenu_CenterCircle);
+        mainBottomMenu_CenterCircle = (ImageView) findViewById(R.id.mainBottomMenu_CenterCircle);
         mainBottom_bgView_Height = Utils_Calc.dpToPx(75+10);
 
         new Timer().schedule(
                 new TimerTask(){
                     @Override
                     public void run(){
-                        meinBottomMenu_CenterCircle_onriginY = meinBottomMenu_CenterCircle.getY();
+                        mainBottomMenu_CenterCircle_onriginY = mainBottomMenu_CenterCircle.getY();
                     }
                 }, 200);
     }
@@ -65,8 +68,8 @@ public class MainBottom_CircleView extends android.support.v7.widget.AppCompatIm
                     dragMove_x = MainBottom_GooeyView.circle.getX();
                     dragMove_y = MainBottom_GooeyView.circle.getY();
                 }
-                dragStart_x = meinBottomMenu_CenterCircle.getX() - e.getRawX();
-                dragStart_y = meinBottomMenu_CenterCircle.getY() - e.getRawY();
+                dragStart_x = mainBottomMenu_CenterCircle.getX() - e.getRawX();
+                dragStart_y = mainBottomMenu_CenterCircle.getY() - e.getRawY();
 
                 MainBottom_GooeyView.dragStart_point_x = e.getX();
                 MainBottom_GooeyView.dragStart_point_y = e.getY();
@@ -75,26 +78,50 @@ public class MainBottom_CircleView extends android.support.v7.widget.AppCompatIm
                 break;
             case MotionEvent.ACTION_MOVE:
                 drag = true;
-                if (drag){
+                if (drag && !dragENTER){
                     dragMove_x = e.getRawX() + dragStart_x;
                     dragMove_y = e.getRawY() + dragStart_y;
                     if (dragMove_y < MainActivity.screenHeight/2.8f){
                         dragMove_y = MainActivity.screenHeight/2.8f;
                     }
 
-                    meinBottomMenu_CenterCircle.setX(dragMove_x);
-                    meinBottomMenu_CenterCircle.setY(dragMove_y);
+                    mainBottomMenu_CenterCircle.setX(dragMove_x);
+                    mainBottomMenu_CenterCircle.setY(dragMove_y);
+                    MainActivity.mainBottomMenu_CenterRlView.setX(dragMove_x);
+                    MainActivity.mainBottomMenu_CenterRlView.setY(dragMove_y);
 
                     MainBottom_GooeyView.dragMove_point_x = dragMove_x;
                     MainBottom_GooeyView.dragMove_point_y = dragMove_y;
 
                     MainBottom_GooeyView.gooeyview_canvas.invalidate();
+
+                    MainActivity.mainBgColor.setAlpha(MainBottom_GooeyView.float_calcRate_alpha);
+                    MainActivity.mainBottomMenu_CenterView_White.setAlpha(MainBottom_GooeyView.float_calcRate_alpha);
                 }
                 break;
             case MotionEvent.ACTION_UP:
                 if (drag){
+                    if (MainActivity.mainBottomMenu_CenterRlView.getY() > MainActivity.screenHeight/1.8f){
+                        dragENTER = false;
+                        Utils_Anim.TransAnim(MainActivity.mainBottomMenu_CenterRlView, -(MainBottom_GooeyView.circleSetOriginX-dragMove_x), 0, -(MainBottom_GooeyView.circleSetOriginY-dragMove_y), 0, 400);
+                        MainActivity.mainBottomMenu_CenterRlView.setX(MainBottom_GooeyView.circleSetOriginX);
+                        MainActivity.mainBottomMenu_CenterRlView.setY(MainBottom_GooeyView.circleSetOriginY);
+                        MainActivity.mainBottomMenu_CenterRlView.invalidate();
+                        Utils_Anim.drawableAlphaAnim(MainActivity.mainBottomMenu_CenterView_White, 1, 0, 200);
+                        MainActivity.mainBgColor.setAlpha(0);
+                    } else {
+                        if (!dragENTER) {
+                            dragENTER = true;
+                            Utils_Anim.TransAnim(MainActivity.mainBottomMenu_CenterRlView, -(MainBottom_GooeyView.circleSetOriginX - dragMove_x), 0, -(MainActivity.screenHeight / 2 - (MainBottom_GooeyView.circleWidth + dragMove_y)), 0, 200);
+                            MainActivity.mainBottomMenu_CenterRlView.setX(MainBottom_GooeyView.circleSetOriginX);
+                            MainActivity.mainBottomMenu_CenterRlView.setY(MainActivity.screenHeight / 2 - MainBottom_GooeyView.circleWidth);
+                            MainActivity.mainBottomMenu_CenterRlView.invalidate();
+                            Utils_Anim.drawableAlphaAnim(MainActivity.mainBottomMenu_CenterView_White, 1, 1, 0);
+                            MainActivity.mainBgColor.setAlpha(1);
+                        }
+                    }
+                    circle_originAnim(800);
                     MainBottom_GooeyView.function_SetFloat_calcRate_reset();
-                    circle_originAnim(600);
                 }
                 drag = false;
                 break;
@@ -102,6 +129,10 @@ public class MainBottom_CircleView extends android.support.v7.widget.AppCompatIm
                 break;
         }
         return true;
+    }
+
+    public void circle_reset_pressAnim(View v){
+        Log.d(":sss", "ssss");
     }
 
     static void circle_originAnim(int duration) {
@@ -112,7 +143,7 @@ public class MainBottom_CircleView extends android.support.v7.widget.AppCompatIm
         animator_x.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             public void onAnimationUpdate(ValueAnimator animation) {
                 float pos_origin_Xn = (float) animation.getAnimatedValue();
-                meinBottomMenu_CenterCircle.setX(pos_origin_Xn);
+                mainBottomMenu_CenterCircle.setX(pos_origin_Xn);
             }
         });
         animator_x.start();
@@ -124,7 +155,7 @@ public class MainBottom_CircleView extends android.support.v7.widget.AppCompatIm
         animator_y.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             public void onAnimationUpdate(ValueAnimator animation) {
                 float pos_origin_Yn = (float) animation.getAnimatedValue();
-                meinBottomMenu_CenterCircle.setY(pos_origin_Yn);
+                mainBottomMenu_CenterCircle.setY(pos_origin_Yn);
                 MainBottom_GooeyView.gooeyview_canvas.invalidate();
             }
         });
