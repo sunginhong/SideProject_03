@@ -5,6 +5,8 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.TranslateAnimation;
 
@@ -41,5 +43,13 @@ public class Utils_Anim {
         anim.setInterpolator(new DecelerateInterpolator((float) 1.5));
         anim.setDuration(duration);
         anim.start();
+    }
+
+    public static void AlphaAnim(View view, float startAlpha, float endAlpha, int duration) {
+        Animation anim = new AlphaAnimation( startAlpha, endAlpha );
+        anim.setFillAfter(true);
+        anim.setInterpolator(new DecelerateInterpolator((float) 1.5));
+        anim.setDuration(duration);
+        view.startAnimation(anim);
     }
 }

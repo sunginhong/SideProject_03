@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -39,7 +40,8 @@ public class MainBottom_GooeyView extends View {
     static float calcJointX_Right = 0;
     static float circleSetOriginX = 0;
     static float circleSetOriginY = 0;
-    static float float_calcRate_alpha = 0;
+    static float float_calcRate_alpha_in = 0;
+    static float float_calcRate_alpha_out = 1;
     static float float_calcRate_0 = 0;
     static float float_calcRate_1 = 0;
     static float float_calcRate_2 = 0;
@@ -57,7 +59,6 @@ public class MainBottom_GooeyView extends View {
 
     public MainBottom_GooeyView(Context context) {
         super(context);
-
         init();
     }
 
@@ -101,17 +102,8 @@ public class MainBottom_GooeyView extends View {
         circleCenterX = circle.getX()+circleWidth/2;
         circleCenterY = circle.getY()+circleWidth/2;
 
-//        float p_x1 = 0;
-//        float p_y1 = mainBottom_bgView_HeightSet;
-//        float p_x2 = dragMove_point_x;
-//        float p_y2 = dragMove_point_y;
-//        float p_x3 = dragMove_point_x;
-//        float p_y3 = dragMove_point_y + (MainActivity.screenHeight - circle.getY())/2;
-//        Log.d("SSSS"+bottom_bgView.getY(), "SSS"+ (circle.getY()));
-//        MainBottom_GooeyView.pathDraw(p_x1, p_y1, p_x2, p_y2, p_x3, p_y3);
         pathDraw();
 
-//        MainBottom_GooeyView.pathDraw(dragMove_point_x - MainActivity.screenWidth/4, dragMove_point_y, dragMove_point_x, dragMove_point_y - Utils_Calc.dpToPx(3), MainActivity.screenWidth/4, dragMove_point_y);
         canvas.drawPath(path, paint);
     }
 
@@ -142,11 +134,10 @@ public class MainBottom_GooeyView extends View {
         calcRateN_ALPHA_RATE = 1;
         float calcRateN_alpha = Utils_Calc.ModulateCalc(circle.getY(), bottomIcnY-circleWidth/2, bottomIcnY-circleWidth*2, 0, calcRateN_ALPHA_RATE);
         String str_calcRate_alpha = String.format("%.2f", calcRateN_alpha);
-        float_calcRate_alpha = Float.parseFloat(str_calcRate_alpha);
-        if (float_calcRate_alpha <= 0){ float_calcRate_alpha = 0; }
-        if (float_calcRate_alpha >= calcRateN_ALPHA_RATE){ float_calcRate_alpha = calcRateN_ALPHA_RATE; }
-        gooeyview_canvas.setAlpha(float_calcRate_alpha);
-//        MainActivity.mainRvLayout.setAlpha(float_calcRate_alpha);
+        float_calcRate_alpha_in = Float.parseFloat(str_calcRate_alpha);
+        if (float_calcRate_alpha_in <= 0){ float_calcRate_alpha_in = 0; }
+        if (float_calcRate_alpha_in >= calcRateN_ALPHA_RATE){ float_calcRate_alpha_in = calcRateN_ALPHA_RATE; }
+//        gooeyview_canvas.setAlpha(float_calcRate_alpha);
 
         calcRateN_0_RATE = MainBottom_CircleView.mainBottom_bgView_Height + circleWidth/2;
         float calcRateN_0 = Utils_Calc.ModulateCalc(circle.getY(), circleSetOriginY, MainActivity.screenHeight/scrollRateN, calcRateN_0_RATE, 0);
@@ -186,24 +177,60 @@ public class MainBottom_GooeyView extends View {
         float calcCurveLeft = circleCenterX - circleWidth/2;
         float calcCurveRight = circleCenterX + circleWidth/2;
 
-        // path start
-        path.moveTo(0, bottomIcnY);
+        if (MainBottom_CircleView.drag) {
+            // path start
+            path.moveTo(0, bottomIcnY);
 
-        // path bridge
-        path.cubicTo(calcJointX_Left - float_calcRate_3 , bottomIcnY, calcCurveLeft, circleCenterY + calcCustomArc + float_calcRate_0, circleCenterX - circleWidth/2, circleCenterY - float_calcRate_2/8);
+            // path bridge
+            path.cubicTo(calcJointX_Left - float_calcRate_3, bottomIcnY, calcCurveLeft, circleCenterY + calcCustomArc + float_calcRate_0, circleCenterX - circleWidth / 2, circleCenterY - float_calcRate_2 / 8);
 
-        path.cubicTo(circleCenterX - circleWidth/2, circleCenterY, circleCenterX - circleWidth/2, roundCircleLeft , circleCenterX +8, roundCircleLeft  );
+            path.cubicTo(circleCenterX - circleWidth / 2, circleCenterY, circleCenterX - circleWidth / 2, roundCircleLeft, circleCenterX + 8, roundCircleLeft);
 
-        // path center
-        path.cubicTo(circleCenterX, roundCircleLeft, circleCenterX + circleWidth/2 -float_calcRate_4, roundCircleLeft , circleCenterX + circleWidth/2, circleCenterY - float_calcRate_2/8 );
+            // path center
+            path.cubicTo(circleCenterX, roundCircleLeft, circleCenterX + circleWidth / 2 - (float_calcRate_4*1), roundCircleLeft, circleCenterX + circleWidth / 2, circleCenterY - float_calcRate_2 / 8);
 
-        path.cubicTo(calcCurveRight, circleCenterY + calcCustomArc + float_calcRate_0, calcJointX_Right + float_calcRate_3 , bottomIcnY, MainActivity.screenWidth, bottomIcnY);
-        // path end
-        path.lineTo(MainActivity.screenWidth, MainActivity.screenHeight);
-        path.lineTo(0, MainActivity.screenHeight);
-        path.close();
+            path.cubicTo(calcCurveRight, circleCenterY + calcCustomArc + float_calcRate_0, calcJointX_Right + float_calcRate_3, bottomIcnY, MainActivity.screenWidth, bottomIcnY);
+            // path end
+            path.lineTo(MainActivity.screenWidth, MainActivity.screenHeight);
+            path.lineTo(0, MainActivity.screenHeight);
+            path.close();
+        } else {
+            float maxY = MainActivity.screenHeight;
+            float maxX = MainActivity.screenWidth;
+            float circleCenterY_reCalc = circleCenterY+circleWidth;
+            float circleCenterY_reHeightCalc = bottomIcnY+circleWidth;
 
-//        Log.d("ssss"+(calcCurveLeft+float_calcRate_3), "ssss"+(calcCurveRight));
+            path.moveTo(0, bottomIcnY);
+
+            // path bridgex
+            path.cubicTo(calcJointX_Left - float_calcRate_3, bottomIcnY, calcCurveLeft, circleCenterY + calcCustomArc + float_calcRate_0, circleCenterX - circleWidth / 2, circleCenterY+circleWidth/2);
+
+            path.cubicTo(circleCenterX - circleWidth / 2, circleCenterY+circleWidth/2, circleCenterX - circleWidth / 2, roundCircleLeft+circleWidth/2, circleCenterX + 8, roundCircleLeft+circleWidth/2);
+
+            // path center
+            path.cubicTo(circleCenterX, roundCircleLeft+circleWidth/2, circleCenterX + circleWidth / 2 - (float_calcRate_4*0), roundCircleLeft+circleWidth/2, circleCenterX + circleWidth / 2, circleCenterY+circleWidth/2);
+
+            path.cubicTo(calcCurveRight, circleCenterY + calcCustomArc + float_calcRate_0, calcJointX_Right + float_calcRate_3, bottomIcnY, MainActivity.screenWidth, bottomIcnY);
+            // path end
+            path.lineTo(MainActivity.screenWidth, MainActivity.screenHeight);
+            path.lineTo(0, MainActivity.screenHeight);
+            path.close();
+
+//            path.moveTo(0, maxY);
+//            // path bridge
+//            path.cubicTo(calcJointX_Left, maxY, 0, circleCenterY_reCalc, circleCenterX, circleCenterY_reCalc );
+//
+//            path.cubicTo(circleCenterX , circleCenterY_reCalc, circleCenterX, roundCircleLeft, circleCenterX, roundCircleLeft);
+//
+//            // path center
+//            path.cubicTo(circleCenterX, roundCircleLeft, circleCenterX, roundCircleLeft, circleCenterX, circleCenterY_reCalc);
+//
+//            path.cubicTo(maxX, circleCenterY_reCalc, calcJointX_Right, maxY, MainActivity.screenWidth, maxY);
+//            // path end
+//            path.lineTo(MainActivity.screenWidth, MainActivity.screenHeight);
+//            path.lineTo(0, MainActivity.screenHeight);
+//            path.close();
+        }
 
     }
 

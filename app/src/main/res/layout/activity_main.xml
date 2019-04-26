@@ -92,13 +92,6 @@
             android:layout_marginEnd="33dp"
             android:layout_toStartOf="@+id/mainBottomMenu_Icn1"/>
 
-        <com.example.sunginhong.sideproject_03.MainBottom_CircleView
-            android:id="@+id/mainBottomMenu_CenterCircle"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_alignTop="@+id/view"
-            android:layout_centerHorizontal="true" />
-
         <RelativeLayout
             android:id="@+id/mainBottomMenu_CenterRlView"
             android:layout_height="wrap_content"
@@ -122,6 +115,13 @@
                 android:alpha="0"
                 android:background="@drawable/centercircle_white" />
         </RelativeLayout>
+
+        <com.example.sunginhong.sideproject_03.MainBottom_CircleView
+            android:id="@+id/mainBottomMenu_CenterCircle"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignTop="@+id/view"
+            android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
 
