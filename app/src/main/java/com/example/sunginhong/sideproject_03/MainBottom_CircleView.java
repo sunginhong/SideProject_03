@@ -116,8 +116,7 @@ public class MainBottom_CircleView extends android.support.v7.widget.AppCompatIm
                             Utils_Anim.AlphaAnim(MainActivity.menuViewRl, MainActivity.menuViewRl.getAlpha(), 1, 500);
                             Utils_Anim.RotateAnim(MainActivity.mainBottomMenu_CenterView_Icn, 0, icnRotate_deg, 0.5f, 0.5f, 500);
                             MainActivity.mainBottomMenu_CenterRlView.setOnClickListener(this);
-                            circle_originAnim(500);
-                            mainBottomMenu_CenterCircle.setY(MainBottom_GooeyView.circleSetOriginY);
+                            circle_originAnim(400);
                         }
                     } else {
                         /// position - bottom
@@ -132,7 +131,12 @@ public class MainBottom_CircleView extends android.support.v7.widget.AppCompatIm
                             MainActivity.mainBottomMenu_CenterView_White.setAlpha(0);
 //                            Utils_Anim.RotateAnim(MainActivity.mainBottomMenu_CenterView_Icn, icnRotate_deg, 0, 0.5f, 0.5f, 300);
                             circle_originAnim(500);
-                            mainBottomMenu_CenterCircle.setY(MainBottom_GooeyView.circleSetOriginY);
+                            Utils_Calc.delayMin(5, new Utils_Calc.DelayCallback() {
+                                @Override
+                                public void afterDelay() {
+                                    mainBottomMenu_CenterCircle.setY(MainBottom_GooeyView.circleSetOriginY);
+                                }
+                            });
                         }
                     }
                 }
@@ -192,13 +196,19 @@ public class MainBottom_CircleView extends android.support.v7.widget.AppCompatIm
                 MainActivity.mainBottomMenu_CenterRlView.invalidate();
                 Utils_Anim.drawableAlphaAnim(MainActivity.mainBottomMenu_CenterView_White, 1, 0, 400);
                 Utils_Anim.drawableAlphaAnim(MainActivity.menuViewRl, 1, 0, 400);
-                Utils_Anim.RotateAnim(MainActivity.mainBottomMenu_CenterView_Icn, icnRotate_deg, 0, 0.5f, 0.5f, 500);
+                Utils_Anim.RotateAnim(MainActivity.mainBottomMenu_CenterView_Icn, icnRotate_deg, 0, 0.5f, 0.5f, 400);
                 MainActivity.menuViewRl.setAlpha(0);
 
                 MainActivity.mainBottomMenu_CenterRlView.setOnClickListener(null);
                 MainBottom_GooeyView.gooeyview_canvas.setAlpha(0);
                 circle_originAnim(0);
                 mainBottomMenu_CenterCircle.setY(MainBottom_GooeyView.circleSetOriginY);
+                Utils_Calc.delayMin(4, new Utils_Calc.DelayCallback() {
+                    @Override
+                    public void afterDelay() {
+                        mainBottomMenu_CenterCircle.setY(MainBottom_GooeyView.circleSetOriginY);
+                    }
+                });
                 break;
         }
 

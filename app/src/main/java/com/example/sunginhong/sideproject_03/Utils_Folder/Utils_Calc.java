@@ -2,6 +2,7 @@ package com.example.sunginhong.sideproject_03.Utils_Folder;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.Handler;
 
 public class Utils_Calc {
     protected Context context;
@@ -34,5 +35,36 @@ public class Utils_Calc {
 
         result = toLow + (((value - fromLow) / (fromHigh - fromLow)) * (toHigh - toLow));
         return result;
+    }
+
+    public interface DelayCallback{
+        void afterDelay();
+    }
+
+//    Utils.delay(4, new Utils.DelayCallback() {
+//        @Override
+//        public void afterDelay() {
+//
+//        }
+//    });
+
+    public static void delay(int secs, final DelayCallback delayCallback){
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                delayCallback.afterDelay();
+            }
+        }, secs * 100); // afterDelay will be executed after (secs*1000) milliseconds.
+    }
+
+    public static void delayMin(int secs, final DelayCallback delayCallback){
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                delayCallback.afterDelay();
+            }
+        }, secs * 10); // afterDelay will be executed after (secs*1000) milliseconds.
     }
 }
