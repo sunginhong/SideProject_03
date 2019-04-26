@@ -124,9 +124,10 @@ public class MainBottom_CircleView extends android.support.v7.widget.AppCompatIm
                         MainActivity.mainBottomMenu_CenterRlView.setY(MainBottom_GooeyView.circleSetOriginY);
                         MainActivity.mainBottomMenu_CenterRlView.invalidate();
                         Utils_Anim.drawableAlphaAnim(MainActivity.mainBottomMenu_CenterView_White, 1, 0, 0);
-                        Utils_Anim.AlphaAnim(MainActivity.menuViewRl, MainActivity.menuViewRl.getAlpha(), 0, 500);
+                        Utils_Anim.AlphaAnim(MainActivity.menuViewRl, MainActivity.menuViewRl.getAlpha(), 0, 300);
+                        MainActivity.mainBottomMenu_CenterView_White.setAlpha(0);
                         mainBottomMenu_CenterCircle.setY(MainBottom_GooeyView.circleSetOriginY);
-                        Utils_Anim.RotateAnim(MainActivity.mainBottomMenu_CenterView_Icn, icnRotate_deg, 0, 0.5f, 0.5f, 500);
+                        Utils_Anim.RotateAnim(MainActivity.mainBottomMenu_CenterView_Icn, icnRotate_deg, 0, 0.5f, 0.5f, 300);
                     }
                     circle_originAnim(500);
                 }
