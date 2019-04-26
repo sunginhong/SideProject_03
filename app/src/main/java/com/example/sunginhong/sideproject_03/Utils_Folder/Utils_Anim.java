@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
+import android.view.animation.RotateAnimation;
+import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 
 public class Utils_Anim {
@@ -47,6 +49,14 @@ public class Utils_Anim {
 
     public static void AlphaAnim(View view, float startAlpha, float endAlpha, int duration) {
         Animation anim = new AlphaAnimation( startAlpha, endAlpha );
+        anim.setFillAfter(true);
+        anim.setInterpolator(new DecelerateInterpolator((float) 1.5));
+        anim.setDuration(duration);
+        view.startAnimation(anim);
+    }
+
+    public static void RotateAnim(View view, float startRotate, float endRotate, float originX, float originY, int duration) {
+        RotateAnimation anim = new RotateAnimation(startRotate, endRotate, Animation.RELATIVE_TO_SELF, originX, Animation.RELATIVE_TO_SELF, originY);
         anim.setFillAfter(true);
         anim.setInterpolator(new DecelerateInterpolator((float) 1.5));
         anim.setDuration(duration);

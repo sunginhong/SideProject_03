@@ -26,6 +26,7 @@ public class MainBottom_CircleView extends android.support.v7.widget.AppCompatIm
     static float dragMove_x = 0;
     static float dragMove_y = 0;
     static ImageView mainBottomMenu_CenterCircle;
+    static float icnRotate_deg = 180+45;
 
     private float mainBottomMenu_CenterCircle_onriginY = 0;
     static int mainBottom_bgView_Height = 0;
@@ -95,7 +96,7 @@ public class MainBottom_CircleView extends android.support.v7.widget.AppCompatIm
                     MainBottom_GooeyView.gooeyview_canvas.invalidate();
 
                     MainBottom_GooeyView.gooeyview_canvas.setAlpha(MainBottom_GooeyView.float_calcRate_alpha_in);
-                    MainActivity.mainBgColor.setAlpha(MainBottom_GooeyView.float_calcRate_alpha_in);
+                    MainActivity.menuViewRl.setAlpha(MainBottom_GooeyView.float_calcRate_alpha_in);
                     MainActivity.mainBottomMenu_CenterView_White.setAlpha(MainBottom_GooeyView.float_calcRate_alpha_in);
                     MainActivity.mainBottomMenu_CenterView_Green.setAlpha(MainBottom_GooeyView.float_calcRate_alpha_out);
                 }
@@ -111,8 +112,8 @@ public class MainBottom_CircleView extends android.support.v7.widget.AppCompatIm
                             MainActivity.mainBottomMenu_CenterRlView.setY(MainActivity.screenHeight / 2 - MainBottom_GooeyView.circleWidth);
                             MainActivity.mainBottomMenu_CenterRlView.invalidate();
                             Utils_Anim.drawableAlphaAnim(MainActivity.mainBottomMenu_CenterView_White, 1, 1, 0);
-                            Utils_Anim.AlphaAnim(MainActivity.mainBgColor, MainActivity.mainBgColor.getAlpha(), 1, 500);
-//                            Utils_Anim.AlphaAnim(MainBottom_GooeyView.gooeyview_canvas, MainBottom_GooeyView.gooeyview_canvas.getAlpha(), 0, 400);
+                            Utils_Anim.AlphaAnim(MainActivity.menuViewRl, MainActivity.menuViewRl.getAlpha(), 1, 500);
+                            Utils_Anim.RotateAnim(MainActivity.mainBottomMenu_CenterView_Icn, 0, icnRotate_deg, 0.5f, 0.5f, 500);
                             MainActivity.mainBottomMenu_CenterRlView.setOnClickListener(this);
                         }
                     } else {
@@ -123,9 +124,9 @@ public class MainBottom_CircleView extends android.support.v7.widget.AppCompatIm
                         MainActivity.mainBottomMenu_CenterRlView.setY(MainBottom_GooeyView.circleSetOriginY);
                         MainActivity.mainBottomMenu_CenterRlView.invalidate();
                         Utils_Anim.drawableAlphaAnim(MainActivity.mainBottomMenu_CenterView_White, 1, 0, 0);
-                        Utils_Anim.AlphaAnim(MainActivity.mainBgColor, MainActivity.mainBgColor.getAlpha(), 0, 500);
+                        Utils_Anim.AlphaAnim(MainActivity.menuViewRl, MainActivity.menuViewRl.getAlpha(), 0, 500);
                         mainBottomMenu_CenterCircle.setY(MainBottom_GooeyView.circleSetOriginY);
-
+                        Utils_Anim.RotateAnim(MainActivity.mainBottomMenu_CenterView_Icn, icnRotate_deg, 0, 0.5f, 0.5f, 500);
                     }
                     circle_originAnim(500);
                 }
@@ -184,8 +185,9 @@ public class MainBottom_CircleView extends android.support.v7.widget.AppCompatIm
                 MainActivity.mainBottomMenu_CenterRlView.setY(MainBottom_GooeyView.circleSetOriginY);
                 MainActivity.mainBottomMenu_CenterRlView.invalidate();
                 Utils_Anim.drawableAlphaAnim(MainActivity.mainBottomMenu_CenterView_White, 1, 0, 400);
-                Utils_Anim.drawableAlphaAnim(MainActivity.mainBgColor, 1, 0, 400);
-                MainActivity.mainBgColor.setAlpha(0);
+                Utils_Anim.drawableAlphaAnim(MainActivity.menuViewRl, 1, 0, 400);
+                Utils_Anim.RotateAnim(MainActivity.mainBottomMenu_CenterView_Icn, icnRotate_deg, 0, 0.5f, 0.5f, 500);
+                MainActivity.menuViewRl.setAlpha(0);
 
                 MainActivity.mainBottomMenu_CenterRlView.setOnClickListener(null);
                 mainBottomMenu_CenterCircle.setY(MainBottom_GooeyView.circleSetOriginY);
