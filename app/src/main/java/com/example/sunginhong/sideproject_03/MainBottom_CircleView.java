@@ -117,6 +117,7 @@ public class MainBottom_CircleView extends android.support.v7.widget.AppCompatIm
                             Utils_Anim.RotateAnim(MainActivity.mainBottomMenu_CenterView_Icn, 0, icnRotate_deg, 0.5f, 0.5f, 500);
                             MainActivity.mainBottomMenu_CenterRlView.setOnClickListener(this);
                             circle_originAnim(500);
+                            mainBottomMenu_CenterCircle.setY(MainBottom_GooeyView.circleSetOriginY);
                         }
                     } else {
                         /// position - bottom
@@ -129,7 +130,7 @@ public class MainBottom_CircleView extends android.support.v7.widget.AppCompatIm
                             Utils_Anim.drawableAlphaAnim(MainActivity.mainBottomMenu_CenterView_White, 1, 0, 0);
                             Utils_Anim.AlphaAnim(MainActivity.menuViewRl, MainActivity.menuViewRl.getAlpha(), 0, 300);
                             MainActivity.mainBottomMenu_CenterView_White.setAlpha(0);
-                            Utils_Anim.RotateAnim(MainActivity.mainBottomMenu_CenterView_Icn, icnRotate_deg, 0, 0.5f, 0.5f, 300);
+//                            Utils_Anim.RotateAnim(MainActivity.mainBottomMenu_CenterView_Icn, icnRotate_deg, 0, 0.5f, 0.5f, 300);
                             circle_originAnim(500);
                             mainBottomMenu_CenterCircle.setY(MainBottom_GooeyView.circleSetOriginY);
                         }
