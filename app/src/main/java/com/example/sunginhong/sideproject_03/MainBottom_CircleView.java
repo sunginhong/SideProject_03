@@ -115,6 +115,7 @@ public class MainBottom_CircleView extends android.support.v7.widget.AppCompatIm
                             Utils_Anim.AlphaAnim(MainActivity.menuViewRl, MainActivity.menuViewRl.getAlpha(), 1, 500);
                             Utils_Anim.RotateAnim(MainActivity.mainBottomMenu_CenterView_Icn, 0, icnRotate_deg, 0.5f, 0.5f, 500);
                             MainActivity.mainBottomMenu_CenterRlView.setOnClickListener(this);
+                            circle_originAnim(500);
                         }
                     } else {
                         /// position - bottom
@@ -126,10 +127,10 @@ public class MainBottom_CircleView extends android.support.v7.widget.AppCompatIm
                         Utils_Anim.drawableAlphaAnim(MainActivity.mainBottomMenu_CenterView_White, 1, 0, 0);
                         Utils_Anim.AlphaAnim(MainActivity.menuViewRl, MainActivity.menuViewRl.getAlpha(), 0, 300);
                         MainActivity.mainBottomMenu_CenterView_White.setAlpha(0);
-                        mainBottomMenu_CenterCircle.setY(MainBottom_GooeyView.circleSetOriginY);
                         Utils_Anim.RotateAnim(MainActivity.mainBottomMenu_CenterView_Icn, icnRotate_deg, 0, 0.5f, 0.5f, 300);
+                        circle_originAnim(500);
+                        mainBottomMenu_CenterCircle.setY(MainBottom_GooeyView.circleSetOriginY);
                     }
-                    circle_originAnim(500);
                 }
                 drag = false;
                 break;
@@ -191,6 +192,8 @@ public class MainBottom_CircleView extends android.support.v7.widget.AppCompatIm
                 MainActivity.menuViewRl.setAlpha(0);
 
                 MainActivity.mainBottomMenu_CenterRlView.setOnClickListener(null);
+                MainBottom_GooeyView.gooeyview_canvas.setAlpha(0);
+                circle_originAnim(0);
                 mainBottomMenu_CenterCircle.setY(MainBottom_GooeyView.circleSetOriginY);
                 break;
         }
