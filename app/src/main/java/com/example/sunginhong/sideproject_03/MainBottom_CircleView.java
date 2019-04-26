@@ -74,6 +74,7 @@ public class MainBottom_CircleView extends android.support.v7.widget.AppCompatIm
 
                 MainBottom_GooeyView.dragStart_point_x = e.getX();
                 MainBottom_GooeyView.dragStart_point_y = e.getY();
+                mainBottomMenu_CenterCircle.setY(MainBottom_GooeyView.circleSetOriginY);
                 invalidate();
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -119,17 +120,19 @@ public class MainBottom_CircleView extends android.support.v7.widget.AppCompatIm
                         }
                     } else {
                         /// position - bottom
-                        dragENTER = false;
-                        Utils_Anim.TransAnim(MainActivity.mainBottomMenu_CenterRlView, -(MainBottom_GooeyView.circleSetOriginX-dragMove_x), 0, -(MainBottom_GooeyView.circleSetOriginY-dragMove_y), 0, 500);
-                        MainActivity.mainBottomMenu_CenterRlView.setX(MainBottom_GooeyView.circleSetOriginX);
-                        MainActivity.mainBottomMenu_CenterRlView.setY(MainBottom_GooeyView.circleSetOriginY);
-                        MainActivity.mainBottomMenu_CenterRlView.invalidate();
-                        Utils_Anim.drawableAlphaAnim(MainActivity.mainBottomMenu_CenterView_White, 1, 0, 0);
-                        Utils_Anim.AlphaAnim(MainActivity.menuViewRl, MainActivity.menuViewRl.getAlpha(), 0, 300);
-                        MainActivity.mainBottomMenu_CenterView_White.setAlpha(0);
-                        Utils_Anim.RotateAnim(MainActivity.mainBottomMenu_CenterView_Icn, icnRotate_deg, 0, 0.5f, 0.5f, 300);
-                        circle_originAnim(500);
-                        mainBottomMenu_CenterCircle.setY(MainBottom_GooeyView.circleSetOriginY);
+                        if (drag){
+                            dragENTER = false;
+                            Utils_Anim.TransAnim(MainActivity.mainBottomMenu_CenterRlView, -(MainBottom_GooeyView.circleSetOriginX-dragMove_x), 0, -(MainBottom_GooeyView.circleSetOriginY-dragMove_y), 0, 500);
+                            MainActivity.mainBottomMenu_CenterRlView.setX(MainBottom_GooeyView.circleSetOriginX);
+                            MainActivity.mainBottomMenu_CenterRlView.setY(MainBottom_GooeyView.circleSetOriginY);
+                            MainActivity.mainBottomMenu_CenterRlView.invalidate();
+                            Utils_Anim.drawableAlphaAnim(MainActivity.mainBottomMenu_CenterView_White, 1, 0, 0);
+                            Utils_Anim.AlphaAnim(MainActivity.menuViewRl, MainActivity.menuViewRl.getAlpha(), 0, 300);
+                            MainActivity.mainBottomMenu_CenterView_White.setAlpha(0);
+                            Utils_Anim.RotateAnim(MainActivity.mainBottomMenu_CenterView_Icn, icnRotate_deg, 0, 0.5f, 0.5f, 300);
+                            circle_originAnim(500);
+                            mainBottomMenu_CenterCircle.setY(MainBottom_GooeyView.circleSetOriginY);
+                        }
                     }
                 }
                 drag = false;
