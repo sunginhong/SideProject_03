@@ -15,7 +15,7 @@
         android:height="70dp"
         android:gravity="top|center">
         <shape android:shape="oval">
-            <solid android:color="#5fce55" />
+            <solid android:color="#87c3fc" />
         </shape>
     </item>
 </layer-list>
